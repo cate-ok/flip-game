@@ -19,8 +19,6 @@ function newGame() {
 }
 
 function initGame() {
-    let gameTable = document.getElementById("gameField");
-    gameTable.innerHTML = ""; // delete everything inside "game" table
 
     let gameImages = [];
     gameMap = {};
@@ -43,6 +41,13 @@ function initGame() {
         nextId++;
     }        
     shuffle(gameImages);
+
+    buildGameTable(gameImages);
+}
+
+function buildGameTable(gameImages) {
+    let gameTable = document.getElementById("gameField");
+    gameTable.innerHTML = ""; // delete everything inside "game" table
 
     for (let i = 0; i < GAME_SIZE; i++) {
         let tr = document.createElement('tr');
@@ -68,13 +73,11 @@ function initGame() {
     }
 }
 
-// Fisher-Yates (aka Knuth) Shuffle
+// Fisher-Yates shuffle
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
@@ -83,7 +86,6 @@ function shuffle(array) {
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
     }
-
     return array;
 }
 
